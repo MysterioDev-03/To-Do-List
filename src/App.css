@@ -1,3 +1,4 @@
+/* GENERAL STYLES */
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -14,6 +15,7 @@ body {
   border-radius: 10px;
 }
 
+/* HEADER */
 .header {
   position: relative;
   padding: 1rem;
@@ -44,6 +46,7 @@ body {
   background-color: rgb(231, 31, 31);
 }
 
+/* TASK LIST */
 .task-list {
   flex: 1;
   padding: 1rem;
@@ -52,24 +55,14 @@ body {
 
 .task-item {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.75rem;
   padding: 0.75rem 1rem;
   border: 1px solid #ccc;
   border-radius: 6px;
   margin-bottom: 10px;
-  cursor: pointer;
   transition: background-color 0.2s ease;
-  flex-wrap: nowrap; /* keep checkbox and label side-by-side */
 }
-
-.task-item label {
-  flex: 1;
-  word-break: break-word;      /* break long words */
-  overflow-wrap: anywhere;     /* allow breaking anywhere */
-  display: block;              /* ensures it behaves like a block element */
-}
-
 
 .task-item:hover {
   background-color: #f0f0f0;
@@ -80,10 +73,55 @@ body {
   opacity: 0.7;
 }
 
-.task-item input[type="checkbox"] {
-  pointer-events: none;
+/* TASK LABEL */
+.task-item label {
+  flex: 1;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  display: block;
+  cursor: pointer;
+  padding-left: 34px;
+  position: relative;
 }
 
+/* HIDE CHECKBOX */
+.task-item input[type="checkbox"] {
+  display: none;
+}
+
+/* CUSTOM ROUND CHECKBOX STYLE */
+.task-item label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 24px;
+  height: 24px;
+  background-color: #eee;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.task-item.checked label::before {
+  background-color: #2ecc71;
+  border-color: #2ecc71;
+}
+
+/* CHECK MARK */
+.task-item.checked label::after {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 6px;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* NO TASKS IMAGE */
 .no-tasks {
   display: block;
   max-width: 100%;
@@ -94,6 +132,7 @@ body {
   margin: 0 auto;
 }
 
+/* FORM */
 .input-form {
   display: flex;
   margin-top: auto;
@@ -130,4 +169,125 @@ body {
 
 .add-btn:hover {
   background-color: #1976d2;
+}
+
+/* MODAL */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.modal {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  max-width: 400px;
+  text-align: center;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+
+.modal-buttons button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-buttons button:first-child {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.modal-buttons button:last-child {
+  background-color: #3498db;
+  color: white;
+}
+
+/* COMPLETED COLLAPSIBLE SECTION */
+.completed-section {
+  margin-top: 1.5rem;
+}
+
+.completed-header {
+  background: #d0ffd0;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Label wrapper */
+.label-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* Hide default checkbox */
+.label-wrapper input[type="checkbox"] {
+  display: none;
+}
+
+/* Label styling for custom round checkbox */
+.label-wrapper label {
+  position: relative;
+  padding-left: 34px;
+  cursor: pointer;
+  flex: 1;
+}
+
+/* Custom round checkbox circle */
+.label-wrapper label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 24px;
+  height: 24px;
+  background-color: #eee;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  transition: 0.2s;
+}
+
+/* Green check when checked */
+.task-item.checked .label-wrapper label::before {
+  background-color: #2ecc71;
+  border-color: #2ecc71;
+}
+
+/* Checkmark inside circle */
+.task-item.checked .label-wrapper label::after {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 6px;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Optional: input field for editing */
+.edit-input {
+  flex: 1;
+  padding: 6px;
+  font-size: 1rem;
+  border: 1px solid #999;
+  border-radius: 4px;
 }
